@@ -1,0 +1,34 @@
+import { User } from "next-auth";
+import { FC } from "react";
+import { Avatar, AvatarFallback } from "./ui/Avatar";
+import { Icons } from "./Icons";
+import Image from "next/image";
+import { AvatarProps } from "@radix-ui/react-avatar";
+
+interface UserAvatarProps extends AvatarProps {
+  user: Pick<User, "image" | "name">;
+}
+
+const UserAvatar: FC<UserAvatarProps> = ({ user, ...props }) => {
+  return (
+    <Avatar {...props}>
+      {user?.image ? (
+        <div className="relative aspect-square">
+          <Image
+            src={user?.image}
+            alt="profile picture"
+            fill
+            referrerPolicy="no-referrer"
+          />
+        </div>
+      ) : (
+        <AvatarFallback>
+          <span className="sr-only">{user?.name}</span>
+          <Icons.user className="h-6 w-6" />
+        </AvatarFallback>
+      )}
+    </Avatar>
+  );
+};
+
+export default UserAvatar;
