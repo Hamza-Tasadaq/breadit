@@ -1,4 +1,5 @@
 import MinicreatePost from "@/components/MinicreatePost";
+import PostFeed from "@/components/PostFeed";
 import { INFINITE_SCROLL_PAGINATION_RESULTS } from "@/config";
 import { getAuthSession } from "@/lib/auth";
 import { db } from "@/lib/db";
@@ -43,6 +44,8 @@ const page = async ({ params }: pageProps) => {
         r/{subreddit.name}
       </h1>
       <MinicreatePost session={session} />
+
+      <PostFeed />
     </>
   );
 };
